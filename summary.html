@@ -711,7 +711,7 @@
 
 
         else if (debit_card_bank === 'One-Time-Payment') {
-
+          alert('One-Time-Payment')
           $("#pay-btn-summary").css('display', 'none');
           $("#loader").css('display', 'block');
 
@@ -752,8 +752,9 @@
 
 
             .then(function (response) {
-
+              alert('billing profile created')
               console.log('billing profile created');
+              window.ReactNativeWebView.postMessage('billing profile created')
               return response.json();
             })
 
@@ -826,6 +827,7 @@
 
 
                 .then(function (response) {
+                  window.ReactNativeWebView.postMessage('order item created')
 
                   console.log('order item created');
                   return response.json();
@@ -889,6 +891,8 @@
                   })
 
                     .then(function (response) {
+                      window.ReactNativeWebView.postMessage('order  created')
+
                       console.log('order created');
                       return response.json();
                     })
@@ -928,6 +932,7 @@
 
 
                         .then(function (response) {
+                          window.ReactNativeWebView.postMessage('orderassigned to user')
 
                           console.log('order assigned to user');
                           return response.text();
@@ -941,6 +946,7 @@
 
                           if (coupon_input.length === 0) { //checking if coupon field is empty
                             console.log('coupon empty');
+                            window.ReactNativeWebView.postMessage('coupon empty')
 
                             //create payment controller
 
