@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html>
 
@@ -80,7 +78,8 @@
     <option value="card" class="options">Canara Bank</option>
     <option value="One-Time-Payment" class="options">Other</option>
   </select>
-  <button name="" id="pay-btn-summary" class="agree-btn" type="submit" onclick="validation(event)">AGREE AND PAY</button>
+  <button name="" id="pay-btn-summary" class="agree-btn" type="submit" onclick="validation(event)">AGREE AND
+    PAY</button>
 
   <!-- <script type="text/javascript" src="https://s3.ap-south-1.amazonaws.com/cdn.firstu.in/js/jquery1.5.2.js"></script> -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -186,7 +185,7 @@
         app_data = JSON.parse(app_data)
         window.ReactNativeWebView.postMessage(app_data)
         // document.getElementById("pay1").innerHTML = `Pay ₹${app_data.unit_price}` ;
-        user_token=app_data.token
+        user_token = app_data.token
         car = app_data.car;
         fuel = app_data.fuel;
         lat_lng = app_data.lat_lng;
@@ -253,7 +252,7 @@
         if (mode_payment === 'card' || debit_card_bank === 'card') //checking if credit or supported debit
         {
           console.log('card');
-                window.ReactNativeWebView.postMessage("Starting")
+          window.ReactNativeWebView.postMessage("Starting")
 
           //clicking on pay now hide button and show loading
           $("#pay-btn-summary").css('display', 'none');
@@ -339,7 +338,7 @@
                 }),
                 headers: {
                   "Content-Type": "application/json; charset=utf-8",
-                  "Authorization":`Bearer ${user_token}`
+                  "Authorization": `Bearer ${user_token}`
 
                 }
               })
@@ -404,7 +403,7 @@
                     }),
                     headers: {
                       "Content-Type": "application/json; charset=utf-8",
-                      "Authorization":`Bearer ${user_token}`
+                      "Authorization": `Bearer ${user_token}`
                     }
                   })
 
@@ -440,7 +439,8 @@
                         }),
                         headers: {
                           "Content-Type": "application/json; charset=utf-8",
-                          "Accept": "text/html; charset=UTF-8"
+                          "Accept": "text/html; charset=UTF-8",
+                          "Authorization": `Bearer ${user_token}`
 
                         }
                       })
@@ -467,7 +467,8 @@
                               "total_count": "12"
                             }),
                             headers: {
-                              "Content-Type": "application/json; charset=utf-8"
+                              "Content-Type": "application/json; charset=utf-8",
+                              "Authorization": `Bearer ${user_token}`
 
 
                             }
@@ -533,7 +534,7 @@
                                   // console.log(response)
                                   //              window.ReactNativeWebView.postMessage(response)
                                   ; // here subscription id is printing
-                                  window.ReactNativeWebView.postMessage("loader-stop")
+                                window.ReactNativeWebView.postMessage("loader-stop")
 
                                 var rzp1 = new Razorpay(options);
                                 rzp1.open();
@@ -551,6 +552,7 @@
                                   method: 'get',
                                   headers: {
                                     "Content-Type": "application/json; charset=utf-8",
+                                    "Authorization": `Bearer ${user_token}`
 
                                   }
                                 })
@@ -591,7 +593,7 @@
                                       }),
                                       headers: {
                                         "Content-Type": "application/json; charset=utf-8",
-                                        "Authorization":`Bearer ${user_token}`
+                                        "Authorization": `Bearer ${user_token}`
 
                                       }
                                     })
@@ -651,7 +653,7 @@
                                             // console.log(response)
                                             //              window.ReactNativeWebView.postMessage(response)
                                             ; // here subscription id is printing
-                                            window.ReactNativeWebView.postMessage("loader-stop")
+                                          window.ReactNativeWebView.postMessage("loader-stop")
 
                                           var rzp1 = new Razorpay(options);
                                           rzp1.open();
@@ -742,7 +744,9 @@
               }
             }),
             headers: {
-              "Content-Type": "application/json; charset=utf-8",
+              "Content-Type": "application/vnd.api+json",
+              "Accept": "application/vnd.api+json",
+              "Authorization": `Bearer ${user_token}`
 
             }
           })
@@ -767,28 +771,7 @@
             })
 
             .then(function (response) {
-              console.log({
-                "data": {
-                  "type": "commerce_order_item--default",
-                  "attributes": {
-                    "quantity": "1.00",
-                    "title": product_title,
-                    "unit_price": {
-                      "number": unit_price,
-                      "currency_code": "INR"
-                    }
-                  },
-                  "relationships": {
-                    "purchased_entity": {
-                      "data": {
-                        "type": "commerce_product_variation--car",
-                        "id": product_variation_id
-                      }
-                    }
-                  }
 
-                }
-              })
 
               fetch('' + base_url + '/jsonapi/commerce_order_item/default', {
                 method: 'post',
@@ -815,9 +798,9 @@
                   }
                 }),
                 headers: {
-                  "Content-Type": "application/json; charset=utf-8",
-                  "Authorization":`Bearer ${user_token}`
-
+                  "Content-Type": "application/vnd.api+json",
+                  "Accept": "application/vnd.api+json",
+                  "Authorization": `Bearer ${user_token}`
                 }
               })
 
@@ -838,7 +821,7 @@
                 })
 
                 .then(function (response) {
-                 
+
 
                   fetch('' + base_url + '/jsonapi/commerce_order/default', {
                     method: 'post',
@@ -881,8 +864,9 @@
                       }
                     }),
                     headers: {
-                      "Content-Type": "application/json; charset=utf-8",
-                      "Authorization":`Bearer ${user_token}`
+                      "Content-Type": "application/vnd.api+json",
+                      "Accept": "application/vnd.api+json",
+                      "Authorization": `Bearer ${user_token}`
                     }
                   })
 
@@ -921,7 +905,8 @@
                         }),
                         headers: {
                           "Content-Type": "application/json; charset=utf-8",
-                          "Accept": "text/html; charset=UTF-8"
+                          "Accept": "text/html; charset=UTF-8",
+                          "Authorization": `Bearer ${user_token}`
 
                         }
                       })
@@ -952,7 +937,8 @@
                                 "order_id": order_id
                               }),
                               headers: {
-                                "Content-Type": "application/json; charset=utf-8"
+                                "Content-Type": "application/json; charset=utf-8",
+                                "Authorization": `Bearer ${user_token}`
 
                               }
                             })
@@ -983,7 +969,7 @@
                               // console.log(response)
                               //              window.ReactNativeWebView.postMessage(response)
                               ; // here subscription id is printing
-                              window.ReactNativeWebView.postMessage("loader-stop")
+                            window.ReactNativeWebView.postMessage("loader-stop")
 
                             var rzp1 = new Razorpay(options);
                             rzp1.open();
@@ -1001,6 +987,7 @@
                               method: 'get',
                               headers: {
                                 "Content-Type": "application/json; charset=utf-8",
+                                "Authorization": `Bearer ${user_token}`
 
                               }
                             })
@@ -1041,7 +1028,7 @@
                                   }),
                                   headers: {
                                     "Content-Type": "application/json; charset=utf-8",
-                                    "Authorization":`Bearer ${user_token}`
+                                    "Authorization": `Bearer ${user_token}`
 
                                   }
                                 })
@@ -1105,7 +1092,7 @@
                                         // console.log(response)
                                         //              window.ReactNativeWebView.postMessage(response)
                                         ; // here subscription id is printing
-                                        window.ReactNativeWebView.postMessage("loader-stop")
+                                      window.ReactNativeWebView.postMessage("loader-stop")
 
                                       var rzp1 = new Razorpay(options);
                                       rzp1.open();
@@ -1247,7 +1234,7 @@
                 }),
                 headers: {
                   "Content-Type": "application/json; charset=utf-8",
-                  "Authorization":`Bearer ${user_token}`
+                  "Authorization": `Bearer ${user_token}`
 
                 }
               })
@@ -1307,7 +1294,7 @@
                     }),
                     headers: {
                       "Content-Type": "application/json; charset=utf-8",
-                      "Authorization":`Bearer ${user_token}`
+                      "Authorization": `Bearer ${user_token}`
                     }
                   })
 
@@ -1337,7 +1324,8 @@
                         ),
                         headers: {
                           "Content-Type": "application/json; charset=utf-8",
-                          "Accept": "text/html; charset=UTF-8"
+                          "Accept": "text/html; charset=UTF-8",
+                          "Authorization": `Bearer ${user_token}`
 
                         }
                       })
@@ -1365,6 +1353,7 @@
                             }),
                             headers: {
                               "Content-Type": "application/json; charset=utf-8",
+                              "Authorization": `Bearer ${user_token}`
 
                             }
                           })
@@ -1452,6 +1441,7 @@
                                   method: 'get',
                                   headers: {
                                     "Content-Type": "application/json; charset=utf-8",
+                                    "Authorization": `Bearer ${user_token}`
 
                                   }
                                 })
@@ -1492,7 +1482,7 @@
                                       }),
                                       headers: {
                                         "Content-Type": "application/json; charset=utf-8",
-                                        "Authorization":`Bearer ${user_token}`
+                                        "Authorization": `Bearer ${user_token}`
                                       }
                                     })
                                       .then(function (response) {
@@ -1516,7 +1506,8 @@
                                             "order_id": order_id
                                           }),
                                           headers: {
-                                            "Content-Type": "application/json; charset=utf-8"
+                                            "Content-Type": "application/json; charset=utf-8",
+                                            "Authorization": `Bearer ${user_token}`
 
 
                                           }
