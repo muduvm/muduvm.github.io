@@ -133,6 +133,7 @@
     let lat_lng
     let city
     let uid
+    var user_id
     var user_token
     //dummy_value (data from App come here)
     // car = 'Tata Nexon';
@@ -155,7 +156,7 @@
     // fuel_type = 'Petrol';
     // vehicle_registration = 'vehicle_registration';
 
-    let app_data
+    // let app_data
     // let app_data = {
     //     "address": "remo",
     //     "car": " Chevrolet Beat",
@@ -191,6 +192,7 @@
         lat_lng = app_data.lat_lng;
         city = app_data.city
         uid = app_data.uid
+        user_id = app_data.user_id
         // coupon_input = app_data.coupon_input;
         unit_price = app_data.unit_price;
         product_variation_id = app_data.product_variation_id;
@@ -287,7 +289,7 @@
                   "uid": {
                     "data": {
                       "type": "user--user",
-                      "id": uid
+                      "id": user_id
                     }
                   }
                 }
@@ -296,7 +298,6 @@
             headers: {
               "Content-Type": "application/json; charset=utf-8",
               "Authorization": `Bearer ${user_token}`
-
             }
           })
 
@@ -750,7 +751,7 @@
                   "uid": {
                     "data": {
                       "type": "user--user",
-                      "id": uid
+                      "id": user_id
                     }
                   }
                 }
@@ -1198,7 +1199,7 @@
                   "uid": {
                     "data": {
                       "type": "user--user",
-                      "id": uid
+                      "id": user_id
                     }
                   }
                 }
