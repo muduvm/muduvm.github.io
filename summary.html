@@ -79,7 +79,7 @@
     <option value="One-Time-Payment" class="options">Other</option>
   </select>
   <button name="" id="pay-btn-summary" class="agree-btn" type="submit" onclick="validation(event)">AGREE AND
-    PAY (BETA 2)</button>
+    PAY (BETA)</button>
 
   <!-- <script type="text/javascript" src="https://s3.ap-south-1.amazonaws.com/cdn.firstu.in/js/jquery1.5.2.js"></script> -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -312,6 +312,8 @@
               revision_id = response.data.attributes.revision_id;
               // console.log(revision_id);
               customer_id = response.data.attributes.uuid;
+              window.ReactNativeWebView.postMessage(customer_id)
+
               // console.log(customer_id);
               return response;
             })
@@ -519,9 +521,9 @@
                                       "type": "commerce_order--default",
                                       "id": order_uuid,
                                       "attributes": {
-                                        "uuid": coupon_id,
+                                        "uuid": order_uuid,
                                         "field_subscription_id": subscription_id,
-                                        "field_subscription_status": "active"
+                                        "field_subscription_status": true
                                       }
                                     }
                                   }),
@@ -598,6 +600,11 @@
                                         "data": {
                                           "type": "commerce_order--default",
                                           "id": order_uuid,
+                                          "attributes": {
+                                            "uuid": order_uuid,
+                                            "field_subscription_id": subscription_id,
+                                            "field_subscription_status": true
+                                          },
                                           "relationships": {
                                             "coupons": {
                                               "data": [
@@ -605,9 +612,7 @@
                                                   "type": "commerce_promotion_coupon--commerce_promotion_coupon",
                                                   "id": coupon_id,
                                                   "attributes": {
-                                                    "uuid": coupon_id,
-                                                    "field_subscription_id": subscription_id,
-                                                    "field_subscription_status": "active"
+                                                    "uuid": coupon_id
                                                   }
                                                 }
                                               ]
@@ -794,6 +799,8 @@
               revision_id = response.data.attributes.revision_id;
               console.log(revision_id);
               customer_id = response.data.attributes.uuid;
+              window.ReactNativeWebView.postMessage(customer_id)
+
               // console.log(customer_id);
               return response;
             })
@@ -912,6 +919,7 @@
 
                       order_id = response.data.attributes.order_id;
                       order_uuid = response.data.attributes.uuid;
+                      window.ReactNativeWebView.postMessage(order_uuid)
 
                       console.log(order_id);
                       console.log({
@@ -968,6 +976,24 @@
                                 "Content-Type": "application/json; charset=utf-8",
                                 "Authorization": `Bearer ${user_token}`
 
+                              }
+                            })
+
+                            fetch('' + base_url + '/jsonapi/commerce_order/default/' + order_uuid + '', {
+                              method: 'PATCH',
+                              body: JSON.stringify({
+                                "data": {
+                                  "type": "commerce_order--default",
+                                  "id": order_uuid,
+                                  "attributes": {
+                                    "uuid": order_uuid,
+                                    "field_subscription_status": true
+                                  }
+                                }
+                              }),
+                              headers: {
+                                "Content-Type": "application/json; charset=utf-8",
+                                "Authorization": `Bearer ${user_token}`
                               }
                             })
 
@@ -1032,13 +1058,18 @@
 
                               })
                               .then(function (response) {
-
+                             
                                 fetch('' + base_url + '/jsonapi/commerce_order/default/' + order_uuid + '', {
                                   method: 'PATCH',
                                   body: JSON.stringify({
                                     "data": {
                                       "type": "commerce_order--default",
                                       "id": order_uuid,
+                                      "attributes": {
+                                        "uuid": order_uuid,
+                                        "field_subscription_id": subscription_id,
+                                        "field_subscription_status": true
+                                      },
                                       "relationships": {
                                         "coupons": {
                                           "data": [
@@ -1234,6 +1265,8 @@
               revision_id = response.data.attributes.revision_id;
               // console.log(revision_id);
               customer_id = response.data.attributes.uuid;
+              window.ReactNativeWebView.postMessage(customer_id)
+
               // console.log(customer_id);
               return response;
             })
@@ -1497,6 +1530,10 @@
                                         "data": {
                                           "type": "commerce_order--default",
                                           "id": order_uuid,
+                                      "attributes": {
+                                        "uuid": order_uuid,
+                                        "field_subscription_status": true
+                                      },
                                           "relationships": {
                                             "coupons": {
                                               "data": [
