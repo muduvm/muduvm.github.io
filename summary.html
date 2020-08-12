@@ -79,7 +79,7 @@
     <option value="One-Time-Payment" class="options">Other</option>
   </select>
   <button name="" id="pay-btn-summary" class="agree-btn" type="submit" onclick="validation(event)">AGREE AND
-    PAY (BETA 1)</button>
+    PAY (BETA 2)</button>
 
   <!-- <script type="text/javascript" src="https://s3.ap-south-1.amazonaws.com/cdn.firstu.in/js/jquery1.5.2.js"></script> -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -539,10 +539,10 @@
                                     payment_id = response.razorpay_payment_id;
                                     // fbq('track', 'Purchase', { value: unit_price, currency: 'INR' });
                                     //alert('Thanks for subscribing, welcome to the FirstU family. You will receive the welcome mail and message shortly. We are here to help if you need it. Call us at +91-9686993660 or write to us at support@firstu.in');
-                                    if(app_data.upgrade_sub)
-                                          window.ReactNativeWebView.postMessage("Subscribed")
-                                          else
-                                          window.ReactNativeWebView.postMessage("Upgrade Subscribed")
+                                    if (app_data.upgrade_sub)
+                                      window.ReactNativeWebView.postMessage("Upgrade Subscribed")
+                                    else
+                                      window.ReactNativeWebView.postMessage("Subscribed")
 
                                   },
                                   "notes": {
@@ -667,11 +667,11 @@
                                               payment_id = response.razorpay_payment_id;
                                               // fbq('track', 'Purchase', { value: unit_price, currency: 'INR' });
                                               //alert('Thanks for subscribing, welcome to the FirstU family. You will receive the welcome mail and message shortly. We are here to help if you need it. Call us at +91-9686993660 or write to us at support@firstu.in');
-                                              
-                                              if(app_data.upgrade_sub)
-                                          window.ReactNativeWebView.postMessage("Subscribed")
-                                          else
-                                          window.ReactNativeWebView.postMessage("Upgrade Subscribed")
+
+                                              if (app_data.upgrade_sub)
+                                                window.ReactNativeWebView.postMessage("Upgrade Subscribed")
+                                              else
+                                                window.ReactNativeWebView.postMessage("Subscribed")
                                             },
                                             "notes": {
                                               "order_id": order_id,
@@ -1009,10 +1009,10 @@
                                 payment_id = response.razorpay_payment_id;
                                 // fbq('track', 'Purchase', { value: unit_price, currency: 'INR' });
                                 //alert('Thanks for subscribing, welcome to the FirstU family. You will receive the welcome mail and message shortly. We are here to help if you need it. Call us at +91-9686993660 or write to us at support@firstu.in');
-                                if(app_data.upgrade_sub)
-                                          window.ReactNativeWebView.postMessage("Subscribed")
-                                          else
-                                          window.ReactNativeWebView.postMessage("Upgrade Subscribed")
+                                if (app_data.upgrade_sub)
+                                  window.ReactNativeWebView.postMessage("Upgrade Subscribed")
+                                else
+                                  window.ReactNativeWebView.postMessage("Subscribed")
 
                               },
                               "notes": {
@@ -1063,7 +1063,7 @@
 
                               })
                               .then(function (response) {
-                             
+
                                 fetch('' + base_url + '/jsonapi/commerce_order/default/' + order_uuid + '', {
                                   method: 'PATCH',
                                   body: JSON.stringify({
@@ -1139,10 +1139,10 @@
                                           payment_id = response.razorpay_payment_id;
                                           // fbq('track', 'Purchase', { value: order_total_price, currency: 'INR' });
                                           //alert('Thanks for subscribing, welcome to the FirstU family. You will receive the welcome mail and message shortly. We are here to help if you need it. Call us at +91-9686993660 or write to us at support@firstu.in');
-                                          if(app_data.upgrade_sub)
-                                          window.ReactNativeWebView.postMessage("Subscribed")
+                                          if (app_data.upgrade_sub)
+                                            window.ReactNativeWebView.postMessage("Upgrade Subscribed")
                                           else
-                                          window.ReactNativeWebView.postMessage("Upgrade Subscribed")
+                                            window.ReactNativeWebView.postMessage("Subscribed")
 
                                         },
                                         "notes": {
@@ -1483,10 +1483,10 @@
                                     pass_emandate_response(response);
 
                                     //alert('Thanks for subscribing, welcome to the FirstU family. You will receive the welcome mail and message shortly. We are here to help if you need it. Call us at +91-9686993660 or write to us at support@firstu.in');
-                                    if(app_data.upgrade_sub)
-                                          window.ReactNativeWebView.postMessage("Subscribed")
-                                          else
-                                          window.ReactNativeWebView.postMessage("Upgrade Subscribed")
+                                    if (app_data.upgrade_sub)
+                                      window.ReactNativeWebView.postMessage("Upgrade Subscribed")
+                                    else
+                                      window.ReactNativeWebView.postMessage("Subscribed")
 
                                   },
                                   "notes": {
@@ -1541,10 +1541,10 @@
                                         "data": {
                                           "type": "commerce_order--default",
                                           "id": order_uuid,
-                                      "attributes": {
-                                        "uuid": order_uuid,
-                                        "field_subscription_status": true
-                                      },
+                                          "attributes": {
+                                            "uuid": order_uuid,
+                                            "field_subscription_status": true
+                                          },
                                           "relationships": {
                                             "coupons": {
                                               "data": [
@@ -1622,10 +1622,10 @@
                                               pass_emandate_response(response);
 
                                               //alert('Thanks for subscribing, welcome to the FirstU family. You will receive the welcome mail and message shortly. We are here to help if you need it. Call us at +91-9686993660 or write to us at support@firstu.in');
-                                              if(app_data.upgrade_sub)
-                                          window.ReactNativeWebView.postMessage("Subscribed")
-                                          else
-                                          window.ReactNativeWebView.postMessage("Upgrade Subscribed")
+                                              if (app_data.upgrade_sub)
+                                                window.ReactNativeWebView.postMessage("Upgrade Subscribed")
+                                              else
+                                                window.ReactNativeWebView.postMessage("Subscribed")
 
 
                                             },
