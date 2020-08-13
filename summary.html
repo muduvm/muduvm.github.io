@@ -207,17 +207,13 @@
         running_kms = app_data.running_kms.kms;
         fuel_type = app_data.fuel_type;
         vehicle_registration = app_data.vehicle_registration;
-        if(app_data.constumer_id)
-        alert(app_data.constumer_id)
-
-        alert(app_data.upgrade_sub)
       }
     )
 
     function getbillingprofile() {
       return new Promise(async (resolve, reject) => {
-        if (app_data.upgrade_sub){
-            fetch('' + base_url + `/jsonapi/profile/customer/${app_data.constumer_id}`)
+        if (app_data.upgrade_sub) {
+          fetch('' + base_url + `/jsonapi/profile/customer/${app_data.constumer_id}`)
             .then(function (response) {
               console.log('billing profile created');
               return response.json();
@@ -231,10 +227,10 @@
               // console.log(customer_id);
               resolve(response);
             })
-          }
+        }
 
-          else{
-            fetch('' + base_url + '/jsonapi/profile/customer', {
+        else {
+          fetch('' + base_url + '/jsonapi/profile/customer', {
             method: 'post',
             body: JSON.stringify({
               "data": {
@@ -286,10 +282,10 @@
               // console.log(customer_id);
               resolve(response);
             })
-          }
+        }
       })
 
-  }
+    }
 
     function validation1(e) {
       alert("coupon_input")
@@ -344,7 +340,7 @@
 
           //create billing profile
           getbillingprofile()
-          .then(function (response) {
+            .then(function (response) {
 
               fetch('' + base_url + '/jsonapi/commerce_order_item/default', {
                 method: 'post',
@@ -759,7 +755,7 @@
 
                 }) // order item response close
 
-              })
+            })
 
 
 
@@ -777,7 +773,7 @@
 
           //create billing profile
           getbillingprofile()
-          .then(function (response) {
+            .then(function (response) {
 
               fetch('' + base_url + '/jsonapi/commerce_order_item/default', {
                 method: 'post',
@@ -1175,7 +1171,7 @@
 
                 }) // order item response close
 
-              }) //bill profile close
+            }) //bill profile close
 
 
 
@@ -1191,7 +1187,7 @@
 
           //create billing profile
           getbillingprofile()
-          .then(function (response) {
+            .then(function (response) {
 
               fetch('' + base_url + '/jsonapi/commerce_order_item/default', {
                 method: 'post',
@@ -1604,10 +1600,10 @@
 
                 }) // order item response close
 
-              })
+            })
 
 
-           //final then response function of first fetch i.e billing profile
+          //final then response function of first fetch i.e billing profile
 
 
 
