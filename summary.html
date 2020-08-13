@@ -79,7 +79,7 @@
     <option value="One-Time-Payment" class="options">Other</option>
   </select>
   <button name="" id="pay-btn-summary" class="agree-btn" type="submit" onclick="validation(event)">AGREE AND
-    PAY (BETA 2)</button>
+    PAY (BETA 3)</button>
 
   <!-- <script type="text/javascript" src="https://s3.ap-south-1.amazonaws.com/cdn.firstu.in/js/jquery1.5.2.js"></script> -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -209,7 +209,6 @@
         vehicle_registration = app_data.vehicle_registration;
       }
     )
-
 
     function validation1(e) {
       alert("coupon_input")
@@ -872,7 +871,6 @@
                           "placed": timeStamp
                         },
                         "relationships": {
-
                           "store_id": {
                             "data": {
                               "type": "commerce_store--online",
@@ -921,7 +919,6 @@
 
                       order_id = response.data.attributes.order_id;
                       order_uuid = response.data.attributes.uuid;
-                      window.ReactNativeWebView.postMessage(order_uuid)
 
                       console.log(order_id);
                       console.log({
