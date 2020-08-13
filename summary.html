@@ -79,7 +79,7 @@
     <option value="One-Time-Payment" class="options">Other</option>
   </select>
   <button name="" id="pay-btn-summary" class="agree-btn" type="submit" onclick="validation(event)">AGREE AND
-    PAY (BETA 3)</button>
+    PAY (BETA 4)</button>
 
   <!-- <script type="text/javascript" src="https://s3.ap-south-1.amazonaws.com/cdn.firstu.in/js/jquery1.5.2.js"></script> -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -210,6 +210,83 @@
       }
     )
 
+    function getbillingprofile() {
+      return new Promise(async (resolve, reject) => {
+        if (app_data.upgrade_sub){
+            fetch('' + base_url + `/jsonapi/profile/customer/${app_data.constumer_id}`)
+            .then(function (response) {
+              console.log('billing profile created');
+              return response.json();
+            })
+
+            .then(function (response) {
+              revision_id = response.data.attributes.revision_id;
+              // console.log(revision_id);
+              customer_id = response.data.attributes.uuid;
+              window.ReactNativeWebView.postMessage(customer_id)
+              // console.log(customer_id);
+              resolve(response);
+            })
+          }
+
+          else{
+            fetch('' + base_url + '/jsonapi/profile/customer', {
+            method: 'post',
+            body: JSON.stringify({
+              "data": {
+                "type": "profile--customer",
+                "attributes": {
+                  "status": true,
+                  "is_default": true,
+                  "field_current_running_kms": running_kms,
+                  "field_email": email,
+                  "field_model_and_make": model,
+                  "field_name": name,
+                  "field_phone": phone
+                },
+                "relationships": {
+                  "type": {
+                    "data": {
+                      "type": "profile_type--profile_type",
+                      "id": "aaf4e4cb-ccc5-4abf-a820-142017c40246"
+                    }
+                  },
+                  "uid": {
+                    "data": {
+                      "type": "user--user",
+                      "id": user_id
+                    }
+                  }
+                }
+              }
+            }),
+            headers: {
+              "Content-Type": "application/json; charset=utf-8",
+              "Authorization": `Bearer ${user_token}`
+
+            }
+          })
+
+
+            .then(function (response) {
+
+              console.log('billing profile created');
+              return response.json();
+            })
+
+            .then(function (response) {
+              revision_id = response.data.attributes.revision_id;
+              // console.log(revision_id);
+              customer_id = response.data.attributes.uuid;
+              window.ReactNativeWebView.postMessage(customer_id)
+              // console.log(customer_id);
+              resolve(response);
+            })
+          }
+      })
+
+  }
+
     function validation1(e) {
       alert("coupon_input")
       coupon_input = document.getElementById('coupon_input').value;
@@ -261,62 +338,9 @@
 
           //create billing profile
 
-          fetch('' + base_url + '/jsonapi/profile/customer', {
-            method: 'post',
-            body: JSON.stringify({
-              "data": {
-                "type": "profile--customer",
-                "attributes": {
-                  "status": true,
-                  "is_default": true,
-                  "field_current_running_kms": running_kms,
-                  "field_email": email,
-                  "field_model_and_make": model,
-                  "field_name": name,
-                  "field_phone": phone
-                },
-                "relationships": {
-                  "type": {
-                    "data": {
-                      "type": "profile_type--profile_type",
-                      "id": "aaf4e4cb-ccc5-4abf-a820-142017c40246"
-                    }
-                  },
-                  "uid": {
-                    "data": {
-                      "type": "user--user",
-                      "id": user_id
-                    }
-                  }
-                }
-              }
-            }),
-            headers: {
-              "Content-Type": "application/json; charset=utf-8",
-              "Authorization": `Bearer ${user_token}`
-            }
-          })
-
-
-            .then(function (response) {
-
-              console.log('billing profile created');
-              return response.json();
-            })
-
-            .then(function (response) {
-              console.log(response)
-              //              window.ReactNativeWebView.postMessage(response)
-              revision_id = response.data.attributes.revision_id;
-              // console.log(revision_id);
-              customer_id = response.data.attributes.uuid;
-              window.ReactNativeWebView.postMessage(customer_id)
-
-              // console.log(customer_id);
-              return response;
-            })
-
-            .then(function (response) {
+          //create billing profile
+          getbillingprofile()
+          .then(function (response) {
 
               fetch('' + base_url + '/jsonapi/commerce_order_item/default', {
                 method: 'post',
@@ -731,10 +755,10 @@
 
                 }) // order item response close
 
+              })
 
 
 
-            }) //final then response function of first fetch i.e billing profile
 
         }//end if of checking "credit card" or supported debit card
 
@@ -747,67 +771,9 @@
 
           //create billing profile
 
-          fetch('' + base_url + '/jsonapi/profile/customer', {
-            method: 'post',
-            body: JSON.stringify({
-              "data": {
-                "type": "profile--customer",
-                "attributes": {
-                  "status": true,
-                  "is_default": true,
-                  "field_current_running_kms": running_kms,
-                  "field_email": email,
-                  "field_model_and_make": model,
-                  "field_name": name,
-                  "field_phone": phone
-                },
-                "relationships": {
-                  "type": {
-                    "data": {
-                      "type": "profile_type--profile_type",
-                      "id": "aaf4e4cb-ccc5-4abf-a820-142017c40246"
-                    }
-                  },
-                  "uid": {
-                    "data": {
-                      "type": "user--user",
-                      "id": user_id
-                    }
-                  }
-                }
-              }
-            }),
-            headers: {
-              "Content-Type": "application/vnd.api+json",
-              "Accept": "application/vnd.api+json",
-              "Authorization": `Bearer ${user_token}`
-
-            }
-          })
-
-
-            .then(function (response) {
-              console.log('billing profile created');
-              window.ReactNativeWebView.postMessage('billing profile created')
-              return response.json();
-            })
-
-            .then(function (response) {
-              console.log(response)
-              //              window.ReactNativeWebView.postMessage(response)
-
-
-              revision_id = response.data.attributes.revision_id;
-              console.log(revision_id);
-              customer_id = response.data.attributes.uuid;
-              window.ReactNativeWebView.postMessage(customer_id)
-
-              // console.log(customer_id);
-              return response;
-            })
-
-            .then(function (response) {
-
+          //create billing profile
+          getbillingprofile()
+          .then(function (response) {
 
               fetch('' + base_url + '/jsonapi/commerce_order_item/default', {
                 method: 'post',
@@ -1205,10 +1171,9 @@
 
                 }) // order item response close
 
+              }) //bill profile close
 
 
-
-            }) //final then response function of first fetch i.e billing profile
 
         }//end if checking other banks debit card
 
@@ -1221,62 +1186,8 @@
           $("#loader").css('display', 'block');
 
           //create billing profile
-
-          fetch('' + base_url + '/jsonapi/profile/customer', {
-            method: 'post',
-            body: JSON.stringify({
-              "data": {
-                "type": "profile--customer",
-                "attributes": {
-                  "status": true,
-                  "is_default": true,
-                  "field_current_running_kms": running_kms,
-                  "field_email": email,
-                  "field_model_and_make": model,
-                  "field_name": name,
-                  "field_phone": phone
-                },
-                "relationships": {
-                  "type": {
-                    "data": {
-                      "type": "profile_type--profile_type",
-                      "id": "aaf4e4cb-ccc5-4abf-a820-142017c40246"
-                    }
-                  },
-                  "uid": {
-                    "data": {
-                      "type": "user--user",
-                      "id": user_id
-                    }
-                  }
-                }
-              }
-            }),
-            headers: {
-              "Content-Type": "application/json; charset=utf-8",
-              "Authorization": `Bearer ${user_token}`
-
-            }
-          })
-
-
-            .then(function (response) {
-
-              console.log('billing profile created');
-              return response.json();
-            })
-
-            .then(function (response) {
-              revision_id = response.data.attributes.revision_id;
-              // console.log(revision_id);
-              customer_id = response.data.attributes.uuid;
-              window.ReactNativeWebView.postMessage(customer_id)
-
-              // console.log(customer_id);
-              return response;
-            })
-
-            .then(function (response) {
+          getbillingprofile()
+          .then(function (response) {
 
               fetch('' + base_url + '/jsonapi/commerce_order_item/default', {
                 method: 'post',
@@ -1689,10 +1600,10 @@
 
                 }) // order item response close
 
+              })
 
 
-
-            }) //final then response function of first fetch i.e billing profile
+           //final then response function of first fetch i.e billing profile
 
 
 
