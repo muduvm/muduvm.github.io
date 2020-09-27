@@ -79,7 +79,7 @@
     <option value="One-Time-Payment" class="options">Other</option>
   </select>
   <button name="" id="pay-btn-summary" class="agree-btn" type="submit" onclick="validation(event)">AGREE AND
-    PAY (test)</button>
+    PAY (test 2)</button>
 
   <!-- <script type="text/javascript" src="https://s3.ap-south-1.amazonaws.com/cdn.firstu.in/js/jquery1.5.2.js"></script> -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -184,6 +184,7 @@
       function (e) {
         app_data = e.data
         app_data = JSON.parse(app_data)
+        alert("got app_data")
         window.ReactNativeWebView.postMessage(app_data)
         // document.getElementById("pay1").innerHTML = `Pay ₹${app_data.unit_price}` ;
         user_token = app_data.token
