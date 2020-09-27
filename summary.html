@@ -79,7 +79,7 @@
     <option value="One-Time-Payment" class="options">Other</option>
   </select>
   <button name="" id="pay-btn-summary" class="agree-btn" type="submit" onclick="validation(event)">AGREE AND
-    PAY</button>
+    PAY (test 3)</button>
 
   <!-- <script type="text/javascript" src="https://s3.ap-south-1.amazonaws.com/cdn.firstu.in/js/jquery1.5.2.js"></script> -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -184,6 +184,7 @@
       function (e) {
         app_data = e.data
         app_data = JSON.parse(app_data)
+        alert("got app_data")
         window.ReactNativeWebView.postMessage(app_data)
         // document.getElementById("pay1").innerHTML = `Pay ₹${app_data.unit_price}` ;
         user_token = app_data.token
@@ -216,6 +217,7 @@
           fetch('' + base_url + `/jsonapi/profile/customer/${app_data.constumer_id}`)
             .then(function (response) {
               console.log('billing profile created');
+              window.ReactNativeWebView.postMessage('profile created')
               return response.json();
             })
 
@@ -271,6 +273,8 @@
             .then(function (response) {
 
               console.log('billing profile created');
+              window.ReactNativeWebView.postMessage('billing profile created')
+
               return response.json();
             })
 
@@ -377,6 +381,7 @@
                 .then(function (response) {
 
                   console.log('order item created');
+                  window.ReactNativeWebView.postMessage('order item created')
 
                   return response.json();
                 })
@@ -439,6 +444,8 @@
 
                     .then(function (response) {
                       console.log('order created');
+                      window.ReactNativeWebView.postMessage('order created')
+
                       return response.json();
                     })
 
@@ -767,7 +774,7 @@
         else if (debit_card_bank === 'One-Time-Payment') {
           $("#pay-btn-summary").css('display', 'none');
           $("#loader").css('display', 'block');
-
+           alert("One-Time-Payment")
 
           //create billing profile
 
@@ -819,6 +826,8 @@
                   //              window.ReactNativeWebView.postMessage(response)
 
                   order_item_id = response.data.attributes.uuid;
+                                                 window.ReactNativeWebView.postMessage(order_item_id)
+
                   return response;
                 })
 
@@ -1224,6 +1233,8 @@
                 .then(function (response) {
 
                   console.log('order item created');
+                  window.ReactNativeWebView.postMessage('order item created')
+
                   return response.json();
                 })
 
@@ -1281,6 +1292,8 @@
 
                     .then(function (response) {
                       console.log('order created');
+                      window.ReactNativeWebView.postMessage('order created')
+
                       return response.json();
                     })
 
@@ -1342,6 +1355,8 @@
                             .then(function (response) {
 
                               console.log('customer created in razorpay');
+                              window.ReactNativeWebView.postMessage('customer created in razorpay')
+
                               return response.json();
                             })
 
